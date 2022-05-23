@@ -7,7 +7,7 @@ Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
 Class-based views
-    1. Add an import:  from other_app.views import Home
+    1. Add an import:  from other_app.views import Home 
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import home
-from main.views import dash
+from core.views import home, dashboard,course_details
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
-    path('dash',dash,name='dash'),
+    path('dashboard',dashboard,name='dashboard'),
+    path('course_detail/<int:course_id>',course_details,name='course_detail'),
+    path('course/',include('course.urls')),
+    path('user/',include('system_user.urls')),
+    path('teacher/',include('system_user.urls')),
 ]
+ 
